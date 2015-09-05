@@ -1,11 +1,15 @@
 # Notes Parser
 Parser for meetings notes
 
+# Installation
+
+	npm install noteparser -g
+
 # Usage
 ## Output to terminal
 
-    node index.js < input.txt
+    noteparser < input.txt
 
 ## Output to file
 
-    node index.js < input.txt > output.txt
+    noteparser < input.txt > output.txt
