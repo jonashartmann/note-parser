@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 
-var Tokenizer = require('./tokenizer');
-var Writer = require('./writer');
+var fs  = require("fs");
 var colors = require('colors');
+var lazy    = require("lazy");
+var Parser = require('./parser');
+var Writer = require('./writer');
 
-var     lazy    = require("lazy"),
-        fs  = require("fs");
 
-
-var parser = new Tokenizer();
+var parser = new Parser();
 var writer = new Writer(process.stdout);
 
 new lazy(process.stdin)
@@ -18,6 +17,9 @@ new lazy(process.stdin)
     .map(parser.tokenize.bind(parser))
     .forEach(function (line) {
 		var toBuf = parser.currentLine + ': ' +  line;
+		if (parser.hasMention()) {
+			toBuf = toBuf.green;
+		}
 		writer.buffer(toBuf.replace(/[ \r\n]+$/g, '\n'));
     })
     .join(function (lines) {

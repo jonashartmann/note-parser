@@ -1,14 +1,16 @@
-var Tokenizer = function Tokenizer () {
+var Parser = function Parser () {
 	return {
 		tokens: [],
 		mentions: [],
 		tasks: [],
 		currentLine: 0,
+		currentLineHasMention: false,
 
 		tokenize: function tokenize(line) {
 			// makes sure that extra spaces are removed
 			var words = line.split(/\s* \s*/);
 			var tokens = [];
+			this.currentLineHasMention = false;
 			while(words.length > 0) {
 				var word = words.shift();
 				var token = {
@@ -19,6 +21,7 @@ var Tokenizer = function Tokenizer () {
 				if (word[0] === '@') {
 					this.mentions.push(token);
 					this.addTask(token);
+					this.currentLineHasMention = true;
 				} else {
 					this.tokens.push(token);
 				}
@@ -36,8 +39,12 @@ var Tokenizer = function Tokenizer () {
 				this.tasks[mention.token] = [];
 			}
 			this.tasks[mention.token].push(mention.line);
+		},
+
+		hasMention: function hasMention () {
+			return this.currentLineHasMention;
 		}
 	};
 };
 
-module.exports = Tokenizer;
+module.exports = Parser;
