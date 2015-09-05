@@ -1,6 +1,6 @@
 {
   "name": "noteparser",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Meeting notes parser",
   "main": "index.js",
   "preferGlobal": "true",
@@ -13,6 +13,7 @@
   "author": "Jonas Hartmann <jonas.hartmann@ymail.com>",
   "dependencies": {
     "colors": "^1.1.2",
+    "commander": "^2.8.1",
     "lazy": "^1.0.11"
   }
 }
