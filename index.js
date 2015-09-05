@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var Tokenizer = require('./tokenizer');
 var Writer = require('./writer');
 var colors = require('colors');
